@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>LayoutTemplatePlugin</RootNamespace>
+    <AssemblyName>LayoutTemplatePlugin</AssemblyName>
+    <CADHost Condition="'$(CADHost)' == ''">autocad</CADHost>
+
+    <AutoCADInstallPath>C:\Program Files\Autodesk\AutoCAD 2025</AutoCADInstallPath>
+    <GstarCADInstallPath>C:\Program Files\GstarCAD\GstarCAD 2024</GstarCADInstallPath>
+    <CADmateInstallPath>C:\Program Files\CADmate\CADmate 2024</CADmateInstallPath>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(CADHost)' == 'autocad'">
+      <ItemGroup>
+        <Reference Include="AcCoreMgd">
+          <HintPath>$(AutoCADInstallPath)\AcCoreMgd.dll</HintPath>
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="AcDbMgd">
+          <HintPath>$(AutoCADInstallPath)\AcDbMgd.dll</HintPath>
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="AcMgd">
+          <HintPath>$(AutoCADInstallPath)\AcMgd.dll</HintPath>
+          <Private>false</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+
+    <When Condition="'$(CADHost)' == 'gstarcad'">
+      <ItemGroup>
+        <Reference Include="GcCoreMgd">
+          <HintPath>$(GstarCADInstallPath)\GcCoreMgd.dll</HintPath>
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="GcDbMgd">
+          <HintPath>$(GstarCADInstallPath)\GcDbMgd.dll</HintPath>
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="GcMgd">
+          <HintPath>$(GstarCADInstallPath)\GcMgd.dll</HintPath>
+          <Private>false</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+
+    <When Condition="'$(CADHost)' == 'cadmate'">
+      <ItemGroup>
+        <Reference Include="CadCoreMgd">
+          <HintPath>$(CADmateInstallPath)\CadCoreMgd.dll</HintPath>
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="CadDbMgd">
+          <HintPath>$(CADmateInstallPath)\CadDbMgd.dll</HintPath>
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="CadMgd">
+          <HintPath>$(CADmateInstallPath)\CadMgd.dll</HintPath>
+          <Private>false</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+</Project>
